@@ -41,7 +41,7 @@ def sonarQubeAnalysis() {
 def build() {
    
    // Run the maven build
-   sh 'sed -i -P 's/0.1-SNAPSHOT/0.1-SNAPSHOT.${BUILD_NUMBER}/g' pom.xml'
+   //sh "sed -i -P 's/0.1-SNAPSHOT/0.1-SNAPSHOT.${BUILD_NUMBER}/g' pom.xml"
    if (isUnix()) {
       sh "'${mvnHome}/bin/mvn' -Dmaven.test.failure.ignore clean package"
    } else {
