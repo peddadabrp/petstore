@@ -126,6 +126,8 @@ def deployQA() {
     }, quickerTests: {
         runTests(20)
     })
+   
+   mail bcc: '', body: "Successfully Deployed to QA. \n Please go to below URL and provide your input to Proceed or Abort to deploy. \n ${BUILD_URL}input", cc: 'babupeddada@gmail.com', from: '', replyTo: '', subject: "job ${JOB_NAME} build number ${BUILD_NUMBER} status ", to: 'babupeddada@gmail.com, peddadabrp@gmail.com'
     
 }
 def runTests(duration) {
