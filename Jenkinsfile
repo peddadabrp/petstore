@@ -15,8 +15,8 @@ node ('master') {
             //stage ('Publish Results') { Results() }
             stage ('Upload Artifact') { UploadArtifact() }
             stage ('Deploy 2 QA') { deployQA() }
-            stage ('Deploy 2 Production') { deployproduction() }
             step([$class: 'WsCleanup'])
+            stage ('Deploy 2 Production') { deployproduction() }
 
          }     
       
