@@ -17,8 +17,10 @@ node ('master') {
 }
 def prepareEnv() { 
   deleteDir() SERVER_ID = 'AP5F6iVz9U5M987nrmegBktcDfd' 
-}def scmcheckout() {
-  //checkout scm   git url: 'https://github.com/mybatis/jpetstore-6.git'   
+}
+def scmcheckout() {
+  //checkout scm   git url: 'https://github.com/mybatis/jpetstore-6.git' 
+  checkout scm
   mvnHome = tool 'M2'
 }
 def sonarQubeAnalysis() { 
