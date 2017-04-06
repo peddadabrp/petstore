@@ -27,28 +27,32 @@ def sonarQubeAnalysis() {
   try {
     if (isUnix()) {
       sh "'${mvnHome}/bin/mvn' org.sonarsource.scanner.maven:sonar-maven-plugin:3.2:sonar"   
-    } else {  bat(/"${mvnHome}\bin\mvn" org.sonarsource.scanner.maven:sonar-maven-plugin:3.2:sonar/)
+    } else {  
+      bat(/"${mvnHome}\bin\mvn" org.sonarsource.scanner.maven:sonar-maven-plugin:3.2:sonar/)
   } catch (Exception e) {
       echo "SonarQube Analysis Failed"
   }
 }
 def build() {
-  // Run the maven build   
-  //sh "sed -i -P 's/0.1-SNAPSHOT/0.1-SNAPSHOT.${BUILD_NUMBER}/g' pom.xml"   
+  // Run the maven build    
   try { 
     if (isUnix()) {
       sh "'${mvnHome}/bin/mvn' -Dmaven.test.failure.ignore clean package"   
-    } else { bat(/"${mvnHome}\bin\mvn" -Dmaven.test.failure.ignore clean package/)   
+    } else {
+      bat(/"${mvnHome}\bin\mvn" -Dmaven.test.failure.ignore clean package/)   
     } catch (Exception e) {
       echo "MAVEN Build Failed"
-  }    
+  }
+}    
   def runTests() { 
     try { 
       if (isUnix()) {  
         setTestStatus(sh (returnStatus: true, script: "'${mvnHome}/bin/mvn' test")) 
       } else {  
         setTestStatus(bat (returnStatus: true, script: "'${mvnHome}/bin/mvn' test")) 
-      }   }  finally {    junit '**/target/surefire-reports/TEST-*.xml'    archive 'target/*.war'  }
+      }   
+    }  finally {    
+      junit '**/target/surefire-reports/TEST-*.xml'    archive 'target/*.war'  }
   }
   @NonCPS
   def setTestStatus(testStatus) {
